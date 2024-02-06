@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "781081545532",
+    "project_id": "safeplace-test",
+    "storage_bucket": "safeplace-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781081545532:android:f528a25a14b48ae4682c39",
+        "android_client_info": {
+          "package_name": "com.ray.xyz.safeplacetest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYdVDISrQfYK6aORttjTKUdUT0gg_y75k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
