@@ -95,11 +95,13 @@ export default function App() {
   }
 
   // Function to send a push notification
-  async function sendPushNotification(): Promise<void> {
-    await Notifications.presentNotificationAsync({
-      title: "Press to send notification",
-      body: "Press the button to send a notification.",
-      badge: 1,
+  async function sendPushNotification() {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Press to send notification",
+        body: "Press the button to send a notification.",
+      },
+      trigger: null, // Trigger immediately
     })
   }
 
