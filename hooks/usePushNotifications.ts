@@ -1,15 +1,18 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Alert } from "react-native"
 
 import * as Notifications from "expo-notifications"
 
 export type PushNotificationState = {
   sendPushNotification(): Promise<void>
+  isLoggedIn: boolean
 }
 
 const usePushNotifications = (): PushNotificationState => {
   const notificationListener = useRef<ReturnType<typeof Notifications.addNotificationReceivedListener>>()
   const responseListener = useRef<ReturnType<typeof Notifications.addNotificationResponseReceivedListener>>()
+
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(null)
 
   useEffect(() => {
     // Set up the notification handler
@@ -38,8 +41,21 @@ const usePushNotifications = (): PushNotificationState => {
         "Notification Response",
         "Would you like to accept or reject?",
         [
-          { text: "Accept", onPress: () => console.log("Accept Pressed"), style: "cancel" },
-          { text: "Reject", onPress: () => console.log("Reject Pressed") },
+          {
+            text: "Accept",
+            onPress: () => {
+              console.log("Accept Pressed")
+              setIsLoggedIn(true)
+            },
+            style: "cancel",
+          },
+          {
+            text: "Reject",
+            onPress: () => {
+              console.log("Reject Pressed")
+              setIsLoggedIn(false)
+            },
+          },
         ],
         { cancelable: false }
       )
@@ -109,6 +125,7 @@ const usePushNotifications = (): PushNotificationState => {
 
   return {
     sendPushNotification,
+    isLoggedIn
   }
 }
 
