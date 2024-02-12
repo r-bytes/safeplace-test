@@ -7,59 +7,9 @@ export type PushNotificationState = {
   sendPushNotification(): Promise<void>
 }
 
-// Can use this function below or use Expo's Push Notification Tool from: https://expo.dev/notifications
-// async function sendPushNotification(expoPushToken: string) {
-//   const message = {
-//     to: expoPushToken,
-//     sound: "default",
-//     title: "Original Title",
-//     body: "And here is the body!",
-//     data: { random: Math.random() },
-//   }
-
-//   await fetch("https://exp.host/--/api/v2/push/send", {
-//     method: "POST",
-//     headers: {
-//       Accept: "application/json",
-//       "Accept-encoding": "gzip, deflate",
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(message),
-//   })
-// }
-
 const usePushNotifications = (): PushNotificationState => {
   const notificationListener = useRef<ReturnType<typeof Notifications.addNotificationReceivedListener>>()
   const responseListener = useRef<ReturnType<typeof Notifications.addNotificationResponseReceivedListener>>()
-
-  // Function to register for push notifications
-  async function registerForPushNotificationsAsync(): Promise<string | undefined> {
-    let token: string
-
-    const { status: existingStatus } = await Notifications.getPermissionsAsync()
-    let finalStatus = existingStatus
-    if (existingStatus !== "granted") {
-      const { status } = await Notifications.requestPermissionsAsync()
-      finalStatus = status
-    }
-    if (finalStatus !== "granted") {
-      alert("Failed to get push token for push notification!")
-      return
-    }
-    token = (await Notifications.getExpoPushTokenAsync()).data
-    return token
-  }
-
-  // Function to send a push notification
-  async function sendPushNotification() {
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: "Press to send notification",
-        body: "Press the button to send a notification.",
-      },
-      trigger: null, // Trigger immediately
-    })
-  }
 
   useEffect(() => {
     // Set up the notification handler
@@ -83,7 +33,7 @@ const usePushNotifications = (): PushNotificationState => {
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
       console.log("Notification response: ", response)
-      // Simulate a modal with Accept and Reject buttons
+      // Show a modal with Accept and Reject buttons
       Alert.alert(
         "Notification Response",
         "Would you like to accept or reject?",
@@ -105,6 +55,57 @@ const usePushNotifications = (): PushNotificationState => {
       }
     }
   }, [])
+
+  // Function to register for push notifications
+  async function registerForPushNotificationsAsync(): Promise<string | undefined> {
+    let token: string
+
+    const { status: existingStatus } = await Notifications.getPermissionsAsync()
+    let finalStatus = existingStatus
+    if (existingStatus !== "granted") {
+      const { status } = await Notifications.requestPermissionsAsync()
+      finalStatus = status
+    }
+    if (finalStatus !== "granted") {
+      alert("Failed to get push token for push notification!")
+      return
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data
+    return token
+  }
+
+  // Todo: Let sendPushNotification function post to endpoint
+  // Use function below to simulate Push Notification, or use Expo's Push Notification Tool from: https://expo.dev/notifications
+  // async function sendPushNotification(expoPushToken: string) {
+  //   const message = {
+  //     to: expoPushToken,
+  //     sound: "default",
+  //     title: "Original Title",
+  //     body: "And here is the body!",
+  //     data: { random: Math.random() },
+  //   }
+
+  //   await fetch("https://exp.host/--/api/v2/push/send", {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Accept-encoding": "gzip, deflate",
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(message),
+  //   })
+  // }
+
+  // Function to send a push notification
+  async function sendPushNotification() {
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "Press to send notification",
+        body: "Press the button to send a notification.",
+      },
+      trigger: null, // Trigger immediately
+    })
+  }
 
   return {
     sendPushNotification,
