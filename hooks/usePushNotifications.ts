@@ -92,13 +92,14 @@ const usePushNotifications = (): PushNotificationState => {
 
   // Todo: Let sendPushNotification function post to endpoint
   // Use function below to simulate Push Notification, or use Expo's Push Notification Tool from: https://expo.dev/notifications
-  // async function sendPushNotification(expoPushToken: string) {
+  // async function sendPushNotification2(expoPushToken: string) {
   //   const message = {
   //     to: expoPushToken,
   //     sound: "default",
   //     title: "Original Title",
   //     body: "And here is the body!",
   //     data: { random: Math.random() },
+  //     _category: "message"
   //   }
 
   //   await fetch("https://exp.host/--/api/v2/push/send", {

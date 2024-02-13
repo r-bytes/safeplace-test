@@ -14,6 +14,7 @@ const MyComplaint = ({ navigation }: { navigation: StackNavigationProp<Navigatio
 
   return (
     <View style={globalStyles.container}>
+      {/* <View style={globalStyles.container}>d</View> */}
       <Text style={globalStyles.titleText}> MyComplaint </Text>
       <Button label="Back" theme="primary" onPress={pressHandler} />
     </View>

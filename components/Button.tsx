@@ -1,6 +1,7 @@
 import { FontAwesome } from "@expo/vector-icons"
 import React from "react"
-import { Pressable, StyleSheet, Text, View } from "react-native"
+import { Pressable, Text, View } from "react-native"
+import { buttonStyles } from "../styles/global"
 
 export default function Button({
   label,
@@ -13,49 +14,20 @@ export default function Button({
 }) {
   if (theme === "primary") {
     return (
-      <View style={[styles.buttonContainer, { borderWidth: 2, borderRadius: 32, borderColor: "#D52828" }]}>
-        <Pressable style={[styles.button, { backgroundColor: "#D52828" }]} onPress={onPress}>
-          <FontAwesome name="picture-o" size={18} color="#ffffff" style={styles.buttonIcon} />
-          <Text style={[styles.buttonLabel, { color: "#ffffff" }]}>{label}</Text>
+      <View style={[buttonStyles.buttonContainer]}>
+        <Pressable style={[buttonStyles.button, { backgroundColor: "#D52828" }]} onPress={onPress}>
+          <FontAwesome name="picture-o" size={18} color="#ffffff" style={buttonStyles.buttonIcon} />
+          <Text style={[buttonStyles.buttonLabel, { color: "#ffffff" }]}>{label}</Text>
         </Pressable>
       </View>
     )
   }
 
   return (
-    <View style={styles.buttonContainer}>
-      <Pressable 
-        style={styles.button} 
-        onPress={onPress}
-    >
-        <Text style={styles.buttonLabel}> {label}</Text>
+    <View style={buttonStyles.buttonContainer}>
+      <Pressable style={[buttonStyles.button, {borderWidth: 2}]} onPress={onPress}>
+        <Text style={[buttonStyles.buttonLabel, { color: "#000" }]}> {label}</Text>
       </Pressable>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  buttonContainer: {
-    width: 320,
-    height: 68,
-    marginHorizontal: 20,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 3,
-  },
-  button: {
-    borderRadius: 32,
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-  },
-  buttonIcon: {
-    paddingRight: 8,
-  },
-  buttonLabel: {
-    color: "#fff",
-    fontSize: 16,
-  },
-})
