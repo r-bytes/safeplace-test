@@ -1,10 +1,14 @@
-import React from 'react'
+import React from "react"
+import { Text, View } from "react-native"
+import { globalStyles } from "../styles/global"
 
 type Props = {}
 
 const NewComplaint = (props: Props) => {
   return (
-    <div>NewComplaintScreen</div>
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.titleText}> NewComplaint </Text>
+    </View>
   )
 }
 

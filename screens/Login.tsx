@@ -1,23 +1,26 @@
-import { StyleSheet, Text, View } from "react-native"
+import React from "react"
+import { Text, View } from "react-native"
 import { Button } from "../components"
 import usePushNotifications from "../hooks/usePushNotifications"
+import { globalStyles } from "../styles/global"
 
 type Props = {}
-const { sendPushNotification } = usePushNotifications()
-const PLACEHOLDER_TITLE = "Welkom"
-const PLACEHOLDER_DETAILS = "Druk op onderstaande knop om door te gaan."
-const PLACEHOLDER_DETAILS2 =
-  "Er wordt vervolgens een push notificatie verstuurd die in de app geaccepteerd dient te worden."
 
-const LoginScreen = (props: Props) => {
+const Login = (props: Props) => {
+  const { sendPushNotification, isLoggedIn } = usePushNotifications()
+  const PLACEHOLDER_TITLE = "Welkom"
+  const PLACEHOLDER_DETAILS = "Druk op onderstaande knop om door te gaan."
+  const PLACEHOLDER_DETAILS2 =
+    "Er wordt vervolgens een push notificatie verstuurd die in de app geaccepteerd dient te worden."
   return (
-    <View style={[styles.container]}>
+    <View style={[globalStyles.container]}>
       <View>
-        <Text style={[styles.title, { color: "#25292e" }]}>{PLACEHOLDER_TITLE}</Text>
+        <Text style={[globalStyles.titleText, { color: "#25292e" }]}>{PLACEHOLDER_TITLE}</Text>
       </View>
       <View>
-        <Text style={[styles.details, { color: "#25292e" }]}>{PLACEHOLDER_DETAILS}</Text>
-        <Text style={[styles.details, { color: "#25292e" }]}>{PLACEHOLDER_DETAILS2}</Text>
+        <Text style={[globalStyles.details, { color: "#25292e" }]}>{PLACEHOLDER_DETAILS}</Text>
+        <Text style={[globalStyles.details, { color: "#25292e" }]}>{PLACEHOLDER_DETAILS2}</Text>
+        <Text style={[globalStyles.test, { color: "#25292e" }]}>{`isLoggedIn: ${isLoggedIn}`}</Text>
       </View>
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Button label="Anoniem inloggen" onPress={sendPushNotification} theme="primary" />
@@ -26,27 +29,4 @@ const LoginScreen = (props: Props) => {
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    gap: 20,
-    paddingTop: 200,
-    paddingHorizontal: 50,
-    flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  title: {
-    marginBottom: 50,
-    fontSize: 56,
-    opacity: 0.6,
-    fontWeight: "bold",
-  },
-  details: {
-    opacity: 0.5,
-    textAlign: "center",
-    fontSize: 16,
-  },
-})
-
-export default LoginScreen
+export default Login

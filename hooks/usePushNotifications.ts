@@ -9,10 +9,10 @@ export type PushNotificationState = {
 }
 
 const usePushNotifications = (): PushNotificationState => {
-  const notificationListener = useRef<ReturnType<typeof Notifications.addNotificationReceivedListener>>()
-  const responseListener = useRef<ReturnType<typeof Notifications.addNotificationResponseReceivedListener>>()
+  const notificationListener = useRef<ReturnType<typeof Notifications.addNotificationReceivedListener | null>>(null)
+  const responseListener = useRef<ReturnType<typeof Notifications.addNotificationResponseReceivedListener | null>>(null)
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(null)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
   useEffect(() => {
     // Set up the notification handler
@@ -125,7 +125,7 @@ const usePushNotifications = (): PushNotificationState => {
 
   return {
     sendPushNotification,
-    isLoggedIn
+    isLoggedIn,
   }
 }
 

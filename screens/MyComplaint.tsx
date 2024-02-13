@@ -1,10 +1,22 @@
-import React from 'react'
+import React from "react"
+import { Text, View } from "react-native"
+import type { NavigationRoute } from "react-navigation"
+import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types"
+import { Button } from "../components"
+import { globalStyles } from "../styles/global"
 
 type Props = {}
 
-const MyComplaint = (props: Props) => {
+const MyComplaint = ({ navigation }: { navigation: StackNavigationProp<NavigationRoute> }) => {
+  const pressHandler = () => {
+    navigation.navigate("Home")
+  }
+
   return (
-    <div>MyComplaintScreen</div>
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.titleText}> MyComplaint </Text>
+      <Button label="Back" theme="primary" onPress={pressHandler} />
+    </View>
   )
 }
 

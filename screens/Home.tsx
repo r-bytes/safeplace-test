@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react"
+import { Text, View } from "react-native"
+import { globalStyles } from "../styles/global"
 
-type Props = {}
-
-const Home = (props: Props) => {
+export default function Home() {
   return (
-    <div>Home</div>
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.titleText}> Home </Text>
+    </View>
   )
 }
-
-export default Home
